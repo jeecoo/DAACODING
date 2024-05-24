@@ -63,10 +63,43 @@ public:
         if (u_ind == -1 || v_ind == -1) {
             return -1; // Vertex not found
         }
+        if (u == v) {
+            return 0; // Distance from a vertex to itself is 0
+        }
 
-        dijkstra(u);
-        return matrix[u_ind][v_ind];
+        int dist[10];
+        bool visited[10];
+
+        for (int i = 0; i < num_vert; i++) {
+            dist[i] = INT_MAX;
+            visited[i] = false;
+        }
+
+        dist[u_ind] = 0;
+
+        for (int count = 0; count < num_vert - 1; count++) {
+            int minDist = INT_MAX, min_index;
+
+            for (int v = 0; v < num_vert; v++) {
+                if (!visited[v] && dist[v] <= minDist) {
+                    minDist = dist[v];
+                    min_index = v;
+                }
+            }
+
+            int u = min_index;
+            visited[u] = true;
+
+            for (int v = 0; v < num_vert; v++) {
+                if (!visited[v] && matrix[u][v] && dist[u] != INT_MAX && dist[u] + matrix[u][v] < dist[v]) {
+                    dist[v] = dist[u] + matrix[u][v];
+                }
+            }
+        }
+
+        return dist[v_ind] == INT_MAX ? -1 : dist[v_ind];
     }
+
 
     void print() {
         cout << "\t";
@@ -85,59 +118,6 @@ public:
                 cout << "\t";
             }
             cout << endl;
-        }
-    }
-
-    void dijkstra(char src) {
-        int src_ind = -1;
-        for (int i = 0; i < num_vert; i++) {
-            if (s_vertices[i] == src) {
-                src_ind = i;
-                break;
-            }
-        }
-        if (src_ind == -1) {
-            cout << "Source vertex not found" << endl;
-            return;
-        }
-
-        int dist[10];
-        bool visited[10];
-
-        for (int i = 0; i < num_vert; i++) {
-            dist[i] = INT_MAX;
-            visited[i] = false;
-        }
-
-        dist[src_ind] = 0;
-
-        for (int count = 0; count < num_vert - 1; count++) {
-            int min = INT_MAX, min_index;
-
-            for (int v = 0; v < num_vert; v++) {
-                if (!visited[v] && dist[v] <= min) {
-                    min = dist[v];
-                    min_index = v;
-                }
-            }
-
-            int u = min_index;
-            visited[u] = true;
-
-            for (int v = 0; v < num_vert; v++) {
-                if (!visited[v] && matrix[u][v] && dist[u] != INT_MAX && dist[u] + matrix[u][v] < dist[v]) {
-                    dist[v] = dist[u] + matrix[u][v];
-                }
-            }
-        }
-
-        printSolution(dist);
-    }
-
-    void printSolution(int dist[]) {
-        cout << "Vertex \t Distance from Source" << endl;
-        for (int i = 0; i < num_vert; i++) {
-            cout << s_vertices[i] << " \t\t " << dist[i] << endl;
         }
     }
 };
