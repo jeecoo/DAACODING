@@ -139,6 +139,39 @@ build QUICKSORT.exe: CXX_EXECUTABLE_LINKER__QUICKSORT_Debug CMakeFiles/QUICKSORT
   TARGET_IMPLIB = libQUICKSORT.dll.a
   TARGET_PDB = QUICKSORT.exe.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target REDLACK
+
+
+#############################################
+# Order-only phony target for REDLACK
+
+build cmake_object_order_depends_target_REDLACK: phony || CMakeFiles/REDLACK.dir
+
+build CMakeFiles/REDLACK.dir/RED_BLACK/main.cpp.obj: CXX_COMPILER__REDLACK_unscanned_Debug C$:/Users/Jeecoo/DAACODING/RED$ BLACK/main.cpp || cmake_object_order_depends_target_REDLACK
+  DEP_FILE = CMakeFiles\REDLACK.dir\RED_BLACK\main.cpp.obj.d
+  FLAGS = -g -std=gnu++98 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\REDLACK.dir
+  OBJECT_FILE_DIR = CMakeFiles\REDLACK.dir\RED_BLACK
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target REDLACK
+
+
+#############################################
+# Link the executable REDLACK.exe
+
+build REDLACK.exe: CXX_EXECUTABLE_LINKER__REDLACK_Debug CMakeFiles/REDLACK.dir/RED_BLACK/main.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\REDLACK.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = REDLACK.exe
+  TARGET_IMPLIB = libREDLACK.dll.a
+  TARGET_PDB = REDLACK.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -169,6 +202,8 @@ build GRAPHMATRIX: phony GRAPHMATRIX.exe
 
 build QUICKSORT: phony QUICKSORT.exe
 
+build REDLACK: phony REDLACK.exe
+
 build SHORTESTPATH: phony SHORTESTPATH.exe
 
 # =============================================================================
@@ -179,7 +214,7 @@ build SHORTESTPATH: phony SHORTESTPATH.exe
 #############################################
 # Folder: C:/Users/Jeecoo/DAACODING/cmake-build-debug
 
-build all: phony SHORTESTPATH.exe GRAPHMATRIX.exe QUICKSORT.exe
+build all: phony SHORTESTPATH.exe GRAPHMATRIX.exe QUICKSORT.exe REDLACK.exe
 
 # =============================================================================
 # Built-in targets
