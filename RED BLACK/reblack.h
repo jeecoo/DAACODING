@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class RedBlack{
+class SplayTree{
     node* root;
     int size;
 
@@ -21,7 +21,7 @@ class RedBlack{
     }
 
 public:
-    RedBlack(){
+    SplayTree(){
         root = NULL;
         size = 0;
     }
@@ -60,34 +60,38 @@ public:
         return true;
     }
 
-//    bool remove(node *curr){
-//
-//        if (root == NULL) {
-//            root = create_node(num, false, NULL);
-//            return true;
-//        }
-//
-//        if (curr == NULL) {
-//            node *n = create_node(num, true, par);
-//
-//            if (is_left)
-//                par->left = n;
-//            else
-//                par->right = n;
-//
-//            restructure(n);
-//            return true;
-//        }
-//
-//        if (curr->element > num) {
-//            insert(curr->left, num, curr, true);
-//        }else {
-//            insert(curr->right, num, curr, false);
-//        }
-//
-//        restructure(curr);
-//        return true;
-//    }
+    bool remove(int num) {
+        remove(root, num, NULL, false);
+        return true;
+    }
+
+    bool remove(node *curr, int num, node *par, bool is_left){
+        if (root == NULL) {
+            root = create_node(num, false, NULL);
+            return true;
+        }
+
+        if (curr == NULL) {
+            node *n = create_node(num, true, par);
+
+            if (is_left)
+                par->left = n;
+            else
+                par->right = n;
+
+            restructure(n);
+            return true;
+        }
+
+        if (curr->element > num) {
+            insert(curr->left, num, curr, true);
+        }else {
+            insert(curr->right, num, curr, false);
+        }
+
+        restructure(curr);
+        return true;
+    }
 
     //RECOLOR
     void recolor(node *curr) {

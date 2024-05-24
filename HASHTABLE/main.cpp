@@ -2,45 +2,46 @@
 #include "hashtable.h"
 using namespace std;
 
-int main() {
-    int n;
-    cout << "Enter the capacity of N: ";
-    cin >> n;
+// WARNING: Do not alter this main function.
+// Doing so will nullify your grade for this activity.
+int main(void) {
+    cout << "Enter capacity of hash table: ";
+    int N;
+    cin >> N;
 
-    HashTable *table = new HashTable(n);
+    HashTable *table = new HashTable(N);
 
     char op;
     string key;
-
     do {
         cout << "Operation: ";
         cin >> op;
-        switch(op) {
-            case 'i':
+
+        switch (op) {
+            case 'i': // Insert
                 cin >> key;
-                table->insert(key);
+                cout << table->insert(key) << endl;
                 break;
-            case 's':
+
+            case 's': // Search
                 cin >> key;
-                cout << table->search(key);
-                cout << "\n";
+                cout << table->search(key) << endl;
                 break;
-            case 'r':
+
+            case 'd': // Delete
                 cin >> key;
-                table->remove(key);
+                cout << table->remove(key) << endl;
                 break;
+
             case 'p':
                 table->print();
                 break;
-            case 'x':
-                cout << "Exiting...";
-                break;
-            default:
-                cout << "Invalid" << endl;
-        }
-    } while(op != 'x');
 
-//    delete table;
+            case 'x':
+                cout << "Exiting";
+                break;
+        }
+    } while (op != 'x');
 
     return 0;
 }

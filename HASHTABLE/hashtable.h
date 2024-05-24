@@ -1,110 +1,119 @@
-#include <string>
+#include <string> // Include the string library
 
 using namespace std;
 
 class HashTable {
-private:
-    string* table;
+    string* table; // Changed to string pointer
     int N;
     int count;
-    string DELETED;
 
+    // Use the ASCII code of the character
+    int hash_code(const string& key) {
+        const int p = 31; // A prime number
+        int hash_value = 0;
+        int power_of_p = 1;
 
-    unsigned long long polynomialHash(const string& key) const {
-        unsigned long long hash = 0;
-        unsigned long long a = 7;
-        for (char ch : key) {
-            hash = hash * a + (ch - 'a' + 1);
+        for (char c : key) {
+            hash_value = (hash_value + (c - 'a' + 1) * power_of_p) % N;
+            power_of_p = (power_of_p * p) % N;
         }
-        return hash;
+
+        return hash_value;
     }
 
-    // MAD compression function with a = 11, b = 251, c = 319
-    int compress(unsigned long long hash) const {
-        unsigned long long a = 11;
-        unsigned long long b = 251;
-        unsigned long long c = 319;
-        return (a * hash + b) % c;
+    // This hash table uses a MAD compression function
+    // where a = 59, b = 17, p = 509
+
+    int compress(int code) {
+        int a = 59;
+        int b = 17;
+        int p = 509;
+        return (((a * code) + b) % p) % N;
+    }
+
+    // Using the knowledge that a hash function is composed of two portions
+    int hashfn(const string& key) {
+        return compress(hash_code(key));
     }
 
 public:
-    HashTable(int capacity) : N(capacity), count(0), DELETED("<DELETED>") {
-        table = new string[N];
-        for (int i = 0; i < N; ++i) {
-            table[i] = "";
-        }
+    HashTable(int N) {
+        table = new string[N]; // Allocate memory for an array of strings
+        this->N = N;
+        this->count = 0;
     }
 
     ~HashTable() {
-        delete[] table;
+        delete[] table; // Deallocate memory
     }
 
-    // Insert using quadratic probing
-    void insert(const string& key) {
-        unsigned long long hash = polynomialHash(key);
-        int index = compress(hash);
-        int i = 0;
-        while (!table[(index + i * i) % N].empty() && table[(index + i * i) % N] != DELETED) {
-            i++;
-            if (i == N) {
-                return;
+    int insert(const string& key) { // Modified to accept a string key
+        int index = hashfn(key);
+        int collisions = 0;
+        int i = 1; // Quadratic probing sequence counter
+
+        while (!table[index].empty()) {
+            if (table[index] == key) {
+                return -1; // Key already exists
             }
+            // Quadratic probing: increment index by i^2
+            index = (index + i * i) % N;
+            collisions++;
+            i++; // Increment sequence counter
         }
-        table[(index + i * i) % N] = key;
+        table[index] = key;
         count++;
+        return collisions;
     }
 
-    // search using quadratic probing
-    int search(const string& key) const {
-        unsigned long long hash = polynomialHash(key);
-        int index = compress(hash);
-        int i = 0;
-        while (!table[(index + i * i) % N].empty()) {
-            if (table[(index + i * i) % N] == key) {
-                return (index + i * i) % N; // Return the index where the key is found
-            }
+    int search(const string& key) { // Modified to accept a string key
+        int index = hashfn(key);
+        int cells = 0;
+        int i = 1; // Quadratic probing sequence counter
 
-            i++;
-            if (i == N) {
-                break;
+        while (!table[index].empty()) {
+            if (table[index] == key) {
+                return cells; // Found the key
             }
+            // Quadratic probing: increment index by i^2
+            index = (index + i * i) % N;
+            cells++;
+            i++; // Increment sequence counter
         }
         return -1; // Key not found
     }
 
-    // Remove using quadratic probing
-    void remove(const string& key) {
-        unsigned long long hash = polynomialHash(key);
-        int index = compress(hash);
-        int i = 0;
-        while (!table[(index + i * i) % N].empty()) {
-            if (table[(index + i * i) % N] == key) {
-                table[(index + i * i) % N] = DELETED;
+    int remove(const string& key) { // Modified to accept a string key
+        int index = hashfn(key);
+        int cells = 0;
+        int i = 1; // Quadratic probing sequence counter
+
+        while (!table[index].empty()) {
+            if (table[index] == key) {
+                table[index] = ""; // Mark as removed
                 count--;
-                return;
+                return cells; // Key removed
             }
-            i++;
-            if (i == N) {
-                break;
-            }
+            // Quadratic probing: increment index by i^2
+            index = (index + i * i) % N;
+            cells++;
+            i++; // Increment sequence counter
         }
+        return -1; // Key not found
     }
 
-    void print() const {
-        for (int i = 0; i < N; ++i) {
-            if (!table[i].empty() && table[i] != DELETED) {
-                cout << "[" << i << "]: " << table[i] << endl;
+    void print() {
+        for (int i = 0; i < N; i++) {
+            cout << i << "\t";
+        }
+        cout << "\n";
+        for (int i = 0; i < N; i++) {
+            if (!table[i].empty()) {
+                cout << table[i] << "\t";
+            } else {
+                cout << "" << "\t";
             }
         }
+        cout << "\n";
     }
-
-//    // Get the number of elements in the hash table
-//    int size() const {
-//        return count;
-//    }
-//
-//    // Get the capacity of the hash table
-//    int capacity() const {
-//        return N;
-//    }
 };

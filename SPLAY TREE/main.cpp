@@ -1,5 +1,5 @@
 #include <iostream>
-#include "reblack.h"
+#include "splay.h"
 
 using namespace std;
 
@@ -16,6 +16,9 @@ int main(int argc, char** argv){
                 cin >> num;
                 tree->insert(num);
                 break;
+            case 's':
+                cin >> num;
+                tree->search(num);
             case 'r':
                 cin >> num;
                 tree->remove(num);

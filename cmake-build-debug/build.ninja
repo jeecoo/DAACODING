@@ -205,6 +205,39 @@ build HASHTABLE.exe: CXX_EXECUTABLE_LINKER__HASHTABLE_Debug CMakeFiles/HASHTABLE
   TARGET_IMPLIB = libHASHTABLE.dll.a
   TARGET_PDB = HASHTABLE.exe.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target SPLAYTREE
+
+
+#############################################
+# Order-only phony target for SPLAYTREE
+
+build cmake_object_order_depends_target_SPLAYTREE: phony || CMakeFiles/SPLAYTREE.dir
+
+build CMakeFiles/SPLAYTREE.dir/SPLAY_TREE/main.cpp.obj: CXX_COMPILER__SPLAYTREE_unscanned_Debug C$:/Users/Jeecoo/DAACODING/SPLAY$ TREE/main.cpp || cmake_object_order_depends_target_SPLAYTREE
+  DEP_FILE = CMakeFiles\SPLAYTREE.dir\SPLAY_TREE\main.cpp.obj.d
+  FLAGS = -g -std=gnu++98 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\SPLAYTREE.dir
+  OBJECT_FILE_DIR = CMakeFiles\SPLAYTREE.dir\SPLAY_TREE
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target SPLAYTREE
+
+
+#############################################
+# Link the executable SPLAYTREE.exe
+
+build SPLAYTREE.exe: CXX_EXECUTABLE_LINKER__SPLAYTREE_Debug CMakeFiles/SPLAYTREE.dir/SPLAY_TREE/main.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\SPLAYTREE.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = SPLAYTREE.exe
+  TARGET_IMPLIB = libSPLAYTREE.dll.a
+  TARGET_PDB = SPLAYTREE.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -241,6 +274,8 @@ build REDLACK: phony REDLACK.exe
 
 build SHORTESTPATH: phony SHORTESTPATH.exe
 
+build SPLAYTREE: phony SPLAYTREE.exe
+
 # =============================================================================
 # Folder targets.
 
@@ -249,7 +284,7 @@ build SHORTESTPATH: phony SHORTESTPATH.exe
 #############################################
 # Folder: C:/Users/Jeecoo/DAACODING/cmake-build-debug
 
-build all: phony SHORTESTPATH.exe GRAPHMATRIX.exe QUICKSORT.exe REDLACK.exe HASHTABLE.exe
+build all: phony SHORTESTPATH.exe GRAPHMATRIX.exe QUICKSORT.exe REDLACK.exe HASHTABLE.exe SPLAYTREE.exe
 
 # =============================================================================
 # Built-in targets
