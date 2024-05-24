@@ -238,6 +238,39 @@ build SPLAYTREE.exe: CXX_EXECUTABLE_LINKER__SPLAYTREE_Debug CMakeFiles/SPLAYTREE
   TARGET_IMPLIB = libSPLAYTREE.dll.a
   TARGET_PDB = SPLAYTREE.exe.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target MERGESORT
+
+
+#############################################
+# Order-only phony target for MERGESORT
+
+build cmake_object_order_depends_target_MERGESORT: phony || CMakeFiles/MERGESORT.dir
+
+build CMakeFiles/MERGESORT.dir/MERGE_SORT/main.cpp.obj: CXX_COMPILER__MERGESORT_unscanned_Debug C$:/Users/Jeecoo/DAACODING/MERGE$ SORT/main.cpp || cmake_object_order_depends_target_MERGESORT
+  DEP_FILE = CMakeFiles\MERGESORT.dir\MERGE_SORT\main.cpp.obj.d
+  FLAGS = -g -std=gnu++98 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\MERGESORT.dir
+  OBJECT_FILE_DIR = CMakeFiles\MERGESORT.dir\MERGE_SORT
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target MERGESORT
+
+
+#############################################
+# Link the executable MERGESORT.exe
+
+build MERGESORT.exe: CXX_EXECUTABLE_LINKER__MERGESORT_Debug CMakeFiles/MERGESORT.dir/MERGE_SORT/main.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\MERGESORT.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = MERGESORT.exe
+  TARGET_IMPLIB = libMERGESORT.dll.a
+  TARGET_PDB = MERGESORT.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -268,6 +301,8 @@ build GRAPHMATRIX: phony GRAPHMATRIX.exe
 
 build HASHTABLE: phony HASHTABLE.exe
 
+build MERGESORT: phony MERGESORT.exe
+
 build QUICKSORT: phony QUICKSORT.exe
 
 build REDLACK: phony REDLACK.exe
@@ -284,7 +319,7 @@ build SPLAYTREE: phony SPLAYTREE.exe
 #############################################
 # Folder: C:/Users/Jeecoo/DAACODING/cmake-build-debug
 
-build all: phony SHORTESTPATH.exe GRAPHMATRIX.exe QUICKSORT.exe REDLACK.exe HASHTABLE.exe SPLAYTREE.exe
+build all: phony SHORTESTPATH.exe GRAPHMATRIX.exe QUICKSORT.exe REDLACK.exe HASHTABLE.exe SPLAYTREE.exe MERGESORT.exe
 
 # =============================================================================
 # Built-in targets

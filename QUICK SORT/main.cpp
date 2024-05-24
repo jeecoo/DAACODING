@@ -39,7 +39,6 @@ void quickSort(int arr[], int start, int end) {
                 cout << endl;
             }
         }
-
         // Swap pivot with element at purple
         int temp = arr[start];
         arr[start] = arr[purple];
