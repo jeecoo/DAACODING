@@ -46,6 +46,9 @@ public:
         int i = 0;
         while (!table[(index + i * i) % N].empty() && table[(index + i * i) % N] != DELETED) {
             i++;
+            if (i == N) {
+                return;
+            }
         }
         table[(index + i * i) % N] = key;
         count++;
@@ -60,6 +63,7 @@ public:
             if (table[(index + i * i) % N] == key) {
                 return (index + i * i) % N; // Return the index where the key is found
             }
+
             i++;
             if (i == N) {
                 break;

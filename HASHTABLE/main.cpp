@@ -40,7 +40,7 @@ int main() {
         }
     } while(op != 'x');
 
-    delete table;
+//    delete table;
 
     return 0;
 }
