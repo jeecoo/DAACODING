@@ -33,7 +33,9 @@ void quickSort(int arr[], int start, int end) {
                 arr[green] = arr[purple];
                 arr[purple] = temp;
                 // Print array after each swap
-                print(arr, end + 1);
+//                for (int i = 0; i <= end; i++)
+//                    cout << arr[i] << " ";
+                print(arr, end+1);
                 cout << endl;
             }
         }
