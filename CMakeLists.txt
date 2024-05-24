@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.28)
+project(DAACODING)
+
+set(CMAKE_CXX_STANDARD 98)
+
+add_executable(SHORTESTPATH "SHORTEST PATH/main.cpp")
+add_executable(GRAPHMATRIX "GRAPH MATRIX/main.cpp")
+add_executable(QUICKSORT "QUICK SORT/main.cpp")
